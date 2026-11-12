@@ -29,7 +29,6 @@ describe("account session", () => {
         email: "home@example.com",
         role: "Homeowner Admin",
         zone: "Main panel",
-        substation: "VOLTRA panel",
       },
     };
     const fetchMock = vi.fn().mockResolvedValue(

@@ -19,7 +19,7 @@ const SUGGESTIONS = [
   "Find current energy-saving guidance for Indian homes.",
 ];
 
-export function GridAdvisorChat() {
+export function HomeEnergyAssistant() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<UsageMessage[]>([]);

@@ -180,18 +180,7 @@ def _doc_to_profile(doc: dict) -> dict:
         "image":       doc.get("image"),
         "createdAt":   doc.get("createdAt", datetime.now(timezone.utc)).isoformat(),
         "lastLoginAt": doc.get("lastLoginAt", datetime.now(timezone.utc)).isoformat(),
-        "substation":  _zone_to_substation(doc.get("zone", "")),
     }
-
-
-def _zone_to_substation(zone: str) -> str:
-    if "Workshop" in zone or "Sub-Panel" in zone:
-        return "VOLTRA Sub-Panel A (Workshop)"
-    if "Commercial" in zone:
-        return "VOLTRA Commercial Panel Node"
-    if "Solar" in zone:
-        return "VOLTRA Solar Storage Gateway"
-    return "VOLTRA Smart Panel Node #1"
 
 
 # ── Router ────────────────────────────────────────────────────────────────────

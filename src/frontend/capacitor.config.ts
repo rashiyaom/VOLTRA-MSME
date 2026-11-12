@@ -2,7 +2,7 @@ import type { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
   appId: "energy.voltra.app",
-  appName: "VOLTRA",
+  appName: "VOLTRA MSME",
   webDir: ".output/public",
   android: {
     allowMixedContent: true,

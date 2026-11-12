@@ -35,8 +35,7 @@ import { VoltraInterventionBanner } from "@/components/VoltraInterventionBanner"
 import { VoltraUserGuide } from "@/components/VoltraUserGuide";
 import { useVoltricsStore } from "@/stores/useVoltricsStore";
 import { authSession } from "@/lib/authSession";
-import homeImage from "@/assets/voltra-home.jpeg";
-import gridImage from "@/assets/voltra-grid.jpg";
+const homeImage = "/assets/cinematic/last-frame.webp";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -378,7 +377,7 @@ function Hero() {
                 className="mt-4 sm:mt-5 text-[11px] sm:text-xs md:text-sm font-mono uppercase tracking-[0.6em] text-cyan-100/80 transition-all duration-75"
                 style={{ paddingLeft: "0.6em" }}
               >
-                AI-Powered Smart Energy &amp; Grid Intelligence
+                ESP32-Powered Home Energy Monitoring
               </p>
             </div>
           </div>
@@ -688,7 +687,7 @@ function AutonomousProtectionShowcase() {
 
       <div className="relative overflow-hidden rounded-[2rem] border border-border/70 dark:border-white/[0.08] shadow-2xl">
         <img
-          src={gridImage}
+          src={homeImage}
           alt="Smart electrical panel monitoring"
           width={1600}
           height={900}
@@ -976,7 +975,7 @@ function TelemetryAnalytics({
             <p className="mt-1 text-base font-bold text-neutral-950">Daily kWh Consumption</p>
           </div>
           <p className="mt-6 text-xs sm:text-sm leading-relaxed text-neutral-900/85 font-normal">
-            Autonomous load balancing helped shave 18% of peak energy demand by shifting heavy water heating cycles to off-peak utility slabs.
+            Example estimate: shifting flexible loads to lower-tariff hours can reduce projected costs. VOLTRA does not operate appliances unless compatible hardware is configured.
           </p>
         </div>
       </div>

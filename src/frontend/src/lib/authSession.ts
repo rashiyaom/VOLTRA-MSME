@@ -1,7 +1,7 @@
 /**
  * authSession.ts
  * ==============
- * Manages authenticated VOLTRA operator and homeowner sessions.
+ * Manages VOLTRA household and smart-panel account sessions.
  */
 
 import { readApiBase } from "@/lib/apiSettings";
@@ -11,7 +11,6 @@ export interface OperatorProfile {
   email: string;
   role: string;
   zone: string;
-  substation: string;
   id?: string;
   image?: string | null;
   designation?: string;
@@ -51,7 +50,6 @@ export interface AuthResponse {
   token: string;
   profile: OperatorProfile & {
     id: string;
-    substation?: string;
     createdAt?: string;
     lastLoginAt?: string;
   };
@@ -94,7 +92,6 @@ const DEFAULT_PROFILE: OperatorProfile = {
   email: "operator@voltra.energy",
   role: "Homeowner & Panel Admin",
   zone: "Main Residential Service (40A / 230V)",
-  substation: "VOLTRA Smart Panel Node #1",
 };
 
 export const authSession = {
@@ -182,7 +179,6 @@ export const authSession = {
       email,
       role,
       zone,
-      substation: "VOLTRA Smart Panel Node #1",
       id: "usr-google-" + Date.now(),
       provider: "google",
     };

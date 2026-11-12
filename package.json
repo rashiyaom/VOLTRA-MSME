@@ -1,5 +1,5 @@
 {
-  "name": "bob-ai-hackathon-techtonics",
+  "name": "voltra-msme",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -8,5 +8,6 @@
     "test": "npm --prefix src/frontend run test",
     "preview": "npm --prefix src/frontend run preview",
     "lint": "npm --prefix src/frontend run lint"
-  }
+  },
+  "description": "VOLTRA MSME ESP32 smart home energy monitoring system."
 }

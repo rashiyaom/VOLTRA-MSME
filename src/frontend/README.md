@@ -1,14 +1,14 @@
-# VOLTRA — IoT ESP32 Smart Energy & Autonomous Circuit Protection
+# VOLTRA MSME — IoT ESP32 Smart Home Energy & Circuit Protection
 
 **Intelligent IoT Electrical Telemetry & Circuit Breaker System**
 
-_Team Techtonics_
+_ESP32 Smart Home Energy System_
 
 ---
 
-## What is VOLTRA?
+## What is VOLTRA MSME?
 
-VOLTRA is a next-generation IoT-powered Smart Energy and Autonomous Circuit Protection system built on the ESP32-S3 dual-core microcontroller. It replaces slow mechanical bi-metal circuit breakers with sub-8ms solid-state relays, continuous 50Hz AC waveform sampling, and autonomous overcurrent protection.
+VOLTRA MSME is an IoT-powered Smart Energy and Autonomous Circuit Protection system built on the ESP32-S3 dual-core microcontroller. It replaces slow mechanical bi-metal circuit breakers with sub-8ms solid-state relays, continuous 50Hz AC waveform sampling, and autonomous overcurrent protection.
 
 > *"Sub-second circuit protection. Autonomous electrical peace of mind."*
 

@@ -1,13 +1,13 @@
 {
-  "name": "voltra-techtonics-monorepo",
+  "name": "voltra-msme-services",
   "private": true,
   "version": "1.0.0",
-  "description": "VOLTRA AI-Powered Grid Intelligence — Techtonics Bobathon submission.",
+  "description": "VOLTRA MSME smart home telemetry and account services.",
   "scripts": {
     "dev": "node ../scripts/dev.mjs",
     "build": "npm run build --prefix src/frontend",
     "preview": "npm run preview --prefix src/frontend",
-    "start": "bash src/start.sh",
+    "start": "bash start.sh",
     "lint": "npm run lint --prefix src/frontend",
     "format": "npm run format --prefix src/frontend"
   }

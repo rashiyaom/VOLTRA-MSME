@@ -43,9 +43,9 @@ export function mountCinematicLanding(): void {
   const exploreContainer = document.createElement("div");
   exploreContainer.className = "explore-indicator-container";
   exploreContainer.innerHTML = `
-    <button id="exploreTrigger" class="explore-trigger-btn" aria-label="Explore VOLTRA Grid Intelligence">
+    <button id="exploreTrigger" class="explore-trigger-btn" aria-label="Explore VOLTRA Home Energy">
       <span class="explore-pulse"></span>
-      <span class="explore-text">Explore Grid Intelligence</span>
+      <span class="explore-text">Explore Home Energy</span>
       <span class="explore-arrow">↓</span>
     </button>`;
   shell.appendChild(exploreContainer);

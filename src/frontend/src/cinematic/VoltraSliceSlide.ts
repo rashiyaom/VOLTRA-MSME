@@ -36,7 +36,7 @@ export class VoltraSliceSlide {
     slide.setAttribute("aria-hidden", "true");
     slide.setAttribute("role", "dialog");
     slide.setAttribute("aria-modal", "true");
-    slide.setAttribute("aria-label", "VOLTRA Grid Intelligence");
+    slide.setAttribute("aria-label", "VOLTRA Home Energy System");
 
     // Vertical slice strips (the "dice" backdrop)
     const sliceContainer = document.createElement("div");
@@ -82,7 +82,7 @@ export class VoltraSliceSlide {
           </h1>
 
           <p class="slice-lead">
-            VOLTRA combines the high-performance ESP32-S3 microcontroller with sub-8ms solid-state circuit breaker relays, continuous AC electrical waveform telemetry, and autonomous overcurrent protection to safeguard modern homes and facilities.
+            VOLTRA MSME connects ESP32 energy readings with a household dashboard for circuit status, usage history, and supported smart panel controls.
           </p>
 
           <!-- Horizontal Stats Bar -->
@@ -126,7 +126,7 @@ export class VoltraSliceSlide {
           <div class="slice-capability-card">
             <div class="slice-cap-num">01</div>
             <h3 class="slice-cap-title">Autonomous Overcurrent Protection</h3>
-            <p class="slice-cap-body">Dynamic inverse-time trip curves (IEC 60255 & IEC 60947) isolating severe overcurrent spikes in less than 8ms.</p>
+            <p class="slice-cap-body">Review each monitored branch and use compatible relay controls from the home panel console. Available controls depend on the connected device and its configuration.</p>
           </div>
           <div class="slice-capability-card">
             <div class="slice-cap-num">02</div>
@@ -136,14 +136,14 @@ export class VoltraSliceSlide {
           <div class="slice-capability-card">
             <div class="slice-cap-num">03</div>
             <h3 class="slice-cap-title">Tariff & Peak Load Optimization</h3>
-            <p class="slice-cap-body">Calculates real-time active power draw, power factor harmonics, and dynamic utility slabs with automated non-critical load shedding.</p>
+            <p class="slice-cap-body">Review household load history, compare estimates with your configured electricity tariff, and build a practical energy plan.</p>
           </div>
         </aside>
       </div>
 
       <!-- Footer Strip -->
       <footer class="slice-footer">
-        <span class="slice-footer-copy">© VOLTRA Energy Systems · Smart Panel Architecture</span>
+        <span class="slice-footer-copy">© VOLTRA MSME · Smart Home Energy</span>
         <span class="slice-footer-tagline">Autonomous circuit breaker protection.</span>
         <span class="slice-footer-scroll-hint">Scroll up to return ↑</span>
       </footer>
@@ -160,7 +160,7 @@ export class VoltraSliceSlide {
 
     const ctaBtn = this.slideElement?.querySelector("#sliceCtaBtn");
     ctaBtn?.addEventListener("click", () => {
-      console.log("[VOLTRA] Platform CTA clicked — launching Grid Intelligence dashboard.");
+      console.log("[VOLTRA] Platform CTA clicked — opening the home energy dashboard.");
       this._navigateToPlatform();
     });
 

@@ -119,9 +119,9 @@ export class VoltraDepthText {
       lightFill: config?.lightFill ?? "#1c2633",
       darkFill: config?.darkFill ?? "rgba(235, 243, 255, 0.88)",
       subtitles: {
-        left: config?.subtitles?.left ?? ["Smarter predictions.", "More reliable power."],
-        center: config?.subtitles?.center ?? ["AI-powered", "grid intelligence."],
-        right: config?.subtitles?.right ?? ["A more stable", "tomorrow."],
+        left: config?.subtitles?.left ?? ["Connected circuits.", "Clearer energy use."],
+        center: config?.subtitles?.center ?? ["ESP32-powered", "home insights."],
+        right: config?.subtitles?.right ?? ["A safer, smarter", "home."],
       },
     };
 

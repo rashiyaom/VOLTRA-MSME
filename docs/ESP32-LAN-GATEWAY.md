@@ -184,7 +184,7 @@ normalisation, HTTP ping, timeouts, polling, localStorage and status callbacks.
 Example wiring to your website's controls:
 
 ```js
-import { VoltraLanGateway } from './website-lan-gateway.mjs';
+import { VoltraLanGateway } from '../website-lan-gateway.mjs';
 
 const gateway = new VoltraLanGateway({
   onData(data) {

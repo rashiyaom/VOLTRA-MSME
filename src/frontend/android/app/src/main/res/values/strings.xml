@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">VOLTRA</string>
-    <string name="title_activity_main">VOLTRA</string>
+    <string name="app_name">VOLTRA MSME</string>
+    <string name="title_activity_main">VOLTRA MSME</string>
     <string name="package_name">energy.voltra.app</string>
     <string name="custom_url_scheme">energy.voltra.app</string>
 </resources>

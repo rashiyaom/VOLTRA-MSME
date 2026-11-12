@@ -369,7 +369,7 @@ function CinematicLandingInner({ children }: { children: React.ReactNode }) {
 
   /* ── Current frame image src ── */
   const frameSrc =
-    theme === "dark" ? "/assets/cinematic/last-frame.webp" : "/assets/cinematic/first-frame.webp";
+    "/assets/cinematic/last-frame.webp";
 
   /*
    * ═══════════════════════════════════════════════════════════════════
@@ -473,7 +473,7 @@ function CinematicLandingInner({ children }: { children: React.ReactNode }) {
               AI-powered
             </tspan>
             <tspan x="50%" dy="38">
-              grid intelligence.
+              home energy insights.
             </tspan>
           </text>
           <text x="94.5%" y="14%" textAnchor="end" className="voltra-subtitle-text" fontSize="28">
@@ -498,7 +498,7 @@ function CinematicLandingInner({ children }: { children: React.ReactNode }) {
         isSliceOpen ? "slice-approaching" : isLeaving ? "slice-leaving" : ""
       }`}
       role="region"
-      aria-label="VOLTRA Grid Intelligence Platform"
+      aria-label="VOLTRA Smart Home Energy Platform"
     >
       <div className="voltra-slice-strips">
         <div className="slice-strip strip-1" />
@@ -573,9 +573,9 @@ function CinematicLandingInner({ children }: { children: React.ReactNode }) {
             </svg>
             <span className="line-seg" />
           </div>
-          <p className="cinematic-mobile-tagline">Predict&nbsp;/&nbsp;Balance&nbsp;/&nbsp;Power</p>
+          <p className="cinematic-mobile-tagline">Connect&nbsp;/&nbsp;Monitor&nbsp;/&nbsp;Protect</p>
           <p className="cinematic-mobile-tagline" style={{ marginTop: 0, letterSpacing: "2px" }}>
-            AI for a more resilient grid
+            ESP32 insights for your home
           </p>
         </div>
 
