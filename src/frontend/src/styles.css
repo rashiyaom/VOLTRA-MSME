@@ -1,0 +1,2091 @@
+@import "tailwindcss";
+@source "../src";
+@import "tw-animate-css";
+@import "./workspace.css";
+@import "./patterns.css";
+@import "./bill-plan.css";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Shared readable Markdown treatment for both VOLTRA assistant surfaces. */
+.voltra-chat-markdown {
+  color: inherit;
+  font-size: 0.82rem;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+
+.voltra-chat-markdown > :first-child {
+  margin-top: 0;
+}
+
+.voltra-chat-markdown > :last-child {
+  margin-bottom: 0;
+}
+
+.voltra-chat-markdown :is(p, ul, ol, blockquote, pre, table) {
+  margin-block: 0.7rem;
+}
+
+.voltra-chat-markdown :is(h1, h2, h3, h4) {
+  margin: 1.1rem 0 0.45rem;
+  color: var(--foreground);
+  font-family: var(--font-display);
+  font-weight: 650;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+}
+
+.voltra-chat-markdown h1 { font-size: 1.1rem; }
+.voltra-chat-markdown h2 { font-size: 1rem; }
+.voltra-chat-markdown :is(h3, h4) { font-size: 0.9rem; }
+
+.voltra-chat-markdown :is(ul, ol) {
+  padding-left: 1.25rem;
+}
+
+.voltra-chat-markdown ul { list-style: disc; }
+.voltra-chat-markdown ol { list-style: decimal; }
+.voltra-chat-markdown li { margin-block: 0.3rem; padding-left: 0.15rem; }
+.voltra-chat-markdown li::marker { color: var(--primary); font-weight: 700; }
+
+.voltra-chat-markdown strong {
+  color: var(--foreground);
+  font-weight: 700;
+}
+
+.voltra-chat-markdown a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, var(--primary), transparent 55%);
+  text-underline-offset: 3px;
+}
+
+.voltra-chat-markdown blockquote {
+  border-left: 3px solid var(--primary);
+  border-radius: 0 0.5rem 0.5rem 0;
+  background: var(--muted);
+  padding: 0.65rem 0.8rem;
+  color: var(--muted-foreground);
+}
+
+.voltra-chat-markdown code {
+  border-radius: 0.3rem;
+  background: var(--muted);
+  padding: 0.12rem 0.32rem;
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+.voltra-chat-markdown pre {
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 0.65rem;
+  background: var(--muted);
+  padding: 0.8rem;
+}
+
+.voltra-chat-markdown pre code {
+  background: transparent;
+  padding: 0;
+}
+
+.voltra-chat-markdown table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+}
+
+.voltra-chat-markdown :is(th, td) {
+  min-width: 6rem;
+  border: 1px solid var(--border);
+  padding: 0.5rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.voltra-chat-markdown th {
+  background: var(--muted);
+  color: var(--foreground);
+  font-weight: 700;
+}
+
+.voltra-chat-answer {
+  animation: voltra-chat-enter 220ms ease-out both;
+}
+
+@keyframes voltra-chat-enter {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .voltra-chat-answer { animation: none; }
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 16px);
+  --radius-4xl: calc(var(--radius) + 24px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-lime: var(--lime);
+  --color-lime-foreground: var(--lime-foreground);
+  --color-signal: var(--signal);
+  --color-signal-foreground: var(--signal-foreground);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-info: var(--info);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-cream: var(--cream);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-overlay: var(--overlay);
+
+  --font-display: "Space Grotesk", "Instrument Serif", sans-serif;
+  --font-sans: "Manrope", "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-body: "DM Sans", "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-card: var(--shadow-card);
+  --shadow-modal: var(--shadow-modal);
+  --shadow-glass: 0 1px 0 0 rgba(255, 255, 255, 0.6) inset,
+    0 12px 40px -12px rgba(20, 30, 20, 0.12);
+  --shadow-soft: 0 30px 80px -40px rgba(20, 30, 20, 0.25);
+}
+
+:root {
+  --radius: 0.5rem;
+  --background: oklch(0.962 0.006 105);
+  --foreground: oklch(0.18 0.014 105);
+  --cream: oklch(0.985 0.005 240);
+  --ink: oklch(0.14 0.02 250);
+
+  --card: oklch(0.995 0.003 105);
+  --card-foreground: oklch(0.18 0.014 105);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.014 105);
+
+  --primary: oklch(0.48 0.18 142);
+  --primary-foreground: oklch(0.99 0 0);
+  --primary-soft: oklch(0.92 0.05 142);
+
+  --secondary: oklch(0.94 0.008 105);
+  --secondary-foreground: oklch(0.22 0.012 105);
+
+  --muted: oklch(0.93 0.007 105);
+  --muted-foreground: oklch(0.48 0.012 105);
+
+  --accent: oklch(0.9 0.05 128);
+  --accent-foreground: oklch(0.2 0.025 125);
+
+  --sidebar: oklch(0.985 0.004 105);
+  --sidebar-foreground: oklch(0.2 0.014 105);
+
+  /* Semantic Telemetry Colors - Clean, high contrast, neon lime accents */
+  --signal: oklch(0.55 0.18 220); /* Authoritative Electric Cyan/Blue */
+  --signal-foreground: oklch(1 0 0);
+  --lime: oklch(0.48 0.18 142); /* High contrast deep emerald in light mode */
+  --lime-foreground: oklch(0.99 0 0);
+  --warning: oklch(0.65 0.16 72); /* Rich Amber */
+  --warning-soft: oklch(0.95 0.04 80);
+  --danger: oklch(0.58 0.22 26); /* Crisp Crimson */
+  --danger-soft: oklch(0.94 0.035 26);
+  --success: oklch(0.55 0.15 155);
+  --success-soft: oklch(0.94 0.035 155);
+  --info: oklch(0.6 0.14 240);
+  --surface: oklch(1 0 0);
+
+  --destructive: oklch(0.58 0.22 26);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --border: oklch(0.86 0.01 105);
+  --input: oklch(0.82 0.012 105);
+  --ring: oklch(0.69 0.2 128);
+
+  --overlay: oklch(0.08 0.01 105 / 70%);
+  --chart-grid: oklch(0.87 0.01 105);
+  --chart-hover: oklch(0.92 0.03 128 / 45%);
+  --shadow-card: 0 1px 2px oklch(0.2 0.01 105 / 5%), 0 8px 26px oklch(0.2 0.01 105 / 4%);
+  --shadow-modal: 0 28px 70px oklch(0.08 0.01 105 / 28%);
+}
+
+.dark {
+  --background: oklch(0.13 0.012 105);
+  --foreground: oklch(0.94 0.008 105);
+  --card: oklch(0.175 0.012 105);
+  --card-foreground: oklch(0.94 0.008 105);
+  --popover: oklch(0.19 0.012 105);
+  --popover-foreground: oklch(0.94 0.008 105);
+
+  --primary: oklch(0.84 0.22 126);
+  --primary-foreground: oklch(0.14 0.035 125);
+  --primary-soft: oklch(0.27 0.065 126);
+
+  --secondary: oklch(0.22 0.012 105);
+  --secondary-foreground: oklch(0.91 0.008 105);
+
+  --muted: oklch(0.215 0.01 105);
+  --muted-foreground: oklch(0.67 0.012 105);
+
+  --accent: oklch(0.25 0.025 126);
+  --accent-foreground: oklch(0.9 0.015 126);
+
+  --sidebar: oklch(0.15 0.012 105);
+  --sidebar-foreground: oklch(0.92 0.008 105);
+
+  --border: oklch(0.27 0.012 105);
+  --input: oklch(0.31 0.014 105);
+  --ring: oklch(0.84 0.22 126);
+
+  --signal: oklch(0.78 0.16 200); /* Luminous Tech Cyan in dark mode */
+  --signal-foreground: oklch(0.1 0.02 250);
+  --lime: oklch(0.84 0.22 126); /* Luminous Lime */
+  --lime-foreground: oklch(0.14 0.035 125);
+  --warning: oklch(0.78 0.16 78);
+  --warning-soft: oklch(0.25 0.045 78);
+  --danger: oklch(0.7 0.2 26);
+  --danger-soft: oklch(0.24 0.055 26);
+  --success: oklch(0.72 0.17 156);
+  --success-soft: oklch(0.24 0.045 156);
+  --info: oklch(0.72 0.13 240);
+  --surface: oklch(0.17 0.02 250);
+
+  --destructive: oklch(0.67 0.21 25);
+  --destructive-foreground: oklch(0.98 0 0);
+
+  --overlay: oklch(0.04 0.005 105 / 78%);
+  --chart-grid: oklch(0.27 0.012 105);
+  --chart-hover: oklch(0.28 0.05 126 / 45%);
+  --shadow-card: 0 1px 1px oklch(0.04 0.01 105 / 45%), 0 12px 35px oklch(0.04 0.01 105 / 18%);
+  --shadow-modal: 0 28px 80px oklch(0.03 0.01 105 / 65%);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html,
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-sans);
+    letter-spacing: 0;
+  }
+}
+
+@utility glass {
+  background: color-mix(in oklab, white 55%, transparent);
+  backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid color-mix(in oklab, white 70%, transparent);
+  box-shadow: var(--shadow-glass);
+}
+
+@utility glass-dark {
+  background: color-mix(in oklab, var(--ink) 78%, transparent);
+  backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid color-mix(in oklab, white 10%, transparent);
+  color: var(--cream);
+}
+
+@utility pill {
+  border-radius: 999px;
+}
+
+@utility hero-grain {
+  background-image:
+    radial-gradient(1200px 500px at 50% -10%, oklch(0.98 0.02 100 / 0.9), transparent 60%),
+    radial-gradient(800px 400px at 80% 10%, oklch(0.9 0.05 128 / 0.35), transparent 70%);
+}
+
+@utility grid-map {
+  border-radius: 1.5rem;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-card);
+  background-image: radial-gradient(color-mix(in oklab, var(--color-muted-foreground) 20%, transparent) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+}
+
+@utility shadow-glow {
+  box-shadow: 0 0 30px color-mix(in oklab, var(--color-signal) 26%, transparent);
+}
+
+.grid-node { z-index: 2; border-radius: .75rem; padding: .5rem; transition: transform .2s ease, background .2s ease; }
+.grid-node:hover, .grid-node.is-selected { transform: translate(-50%, -50%) scale(1.05); }
+.node-core { display:grid; place-items:center; width:2.5rem; height:2.5rem; border-radius:999px; border:1px solid var(--color-border); background:var(--color-surface); box-shadow:0 4px 12px rgba(0,0,0,0.06); }
+.node-core svg { width:1rem; height:1rem; }
+.node-stable { color:var(--color-lime); border-color: color-mix(in oklab, var(--color-lime) 30%, transparent); }
+.node-watch { color:var(--color-warning); border-color: color-mix(in oklab, var(--color-warning) 30%, transparent); }
+.node-risk { color:var(--color-danger); border-color: color-mix(in oklab, var(--color-danger) 40%, transparent); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+
+@utility input {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-foreground);
+  padding: 0.55rem 0.75rem;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+
+  &:focus {
+    border-color: var(--color-ring);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-ring) 25%, transparent);
+  }
+}
+
+/* ==========================================================================
+   VOLTRA CINEMATIC LANDING & SLICE & DICE SYSTEM
+   ========================================================================== */
+
+.cinematic-landing-root {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 40;
+  overflow: hidden;
+  background-color: #000;
+}
+
+/* ── Shell visibility ── */
+.cinematic-mobile-shell  { display: none; }
+.cinematic-desktop-shell { display: contents; }
+
+@media (max-width: 640px) {
+  .cinematic-mobile-shell  { display: flex; flex-direction: column; align-items: center; width: 100%; }
+  .cinematic-desktop-shell { display: none; }
+}
+
+/* ── Fullscreen cinematic container ── */
+/* Desktop: fills the fixed viewport absolutely */
+.fullscreen-cinematic {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  overflow: hidden;
+}
+
+/* Mobile: lives inside the 16:9 card which is already position:relative */
+@media (max-width: 640px) {
+  .fullscreen-cinematic {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   LAYER STACK (bottom → top inside .fullscreen-cinematic)
+
+   z-index 1  .cinematic-canvas        — animated canvas (injected by JS)
+   z-index 2  .cinematic-fallback-frame — static first/last frame img (full bleed)
+   z-index 3  .voltra-letters-svg       — giant VOLTRA text (behind house)
+   z-index 4  .cinematic-house-layer    — same image, clip-path = house polygon
+                                          → house physically IN FRONT of letters
+   z-index 5  .voltra-subtitles-svg     — subtitle copy in the sky
+   z-index 6  .theme-controls           — UI overlay
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* Layer 1 — animated canvas (appended by CinematicFrameSequence.ts) */
+.fullscreen-cinematic .cinematic-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 1;
+}
+
+/* Layer 2 — static fallback, shown until canvas paints */
+.cinematic-fallback-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  display: block;
+  z-index: 2;
+  transition: opacity 0.5s ease;
+}
+
+.fullscreen-cinematic.canvas-ready .cinematic-fallback-frame {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Layer 3 — VOLTRA letters SVG (BEHIND the house) */
+.voltra-letters-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+  display: block;
+  user-select: none;
+}
+
+/* Layer 4 — animated house canvas (appended by CinematicFrameSequence.ts) */
+.fullscreen-cinematic .cinematic-house-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* Layer 4 fallback — house foreground clip (shown ONLY until canvas is ready) */
+.cinematic-house-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  display: block;
+  z-index: 4;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.fullscreen-cinematic.canvas-ready .cinematic-house-layer {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Layer 5 — subtitle SVG */
+.voltra-subtitles-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+  display: block;
+  user-select: none;
+}
+
+/* ── VOLTRA Letters typography ── */
+.voltra-letter {
+  font-family: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 800;
+  text-anchor: start;
+  transition: fill 0.9s ease, opacity 0.9s ease, filter 0.9s ease;
+}
+
+.voltra-theme-light .voltra-letter {
+  fill: #152030;
+  opacity: 0.92;
+  filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.15));
+}
+
+.voltra-theme-dark .voltra-letter {
+  fill: rgba(210, 230, 255, 0.88);
+  opacity: 0.90;
+  filter: drop-shadow(0 4px 32px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 50px rgba(80, 140, 255, 0.10));
+}
+
+/* ── VOLTRA entrance animation — rises from behind the house once loaded ── */
+@keyframes voltraRiseFromBehind {
+  0%   { transform: translateY(200px); opacity: 0; }
+  20%  { opacity: 0; }
+  42%  { opacity: 1; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.voltra-brand-group {
+  transform-box: view-box;
+  opacity: 0;
+  transform: translateY(200px);
+  will-change: transform, opacity;
+}
+
+/* Starts entrance animation only when landing page is ready */
+.cinematic-landing-root.is-landing-ready .voltra-brand-group {
+  animation: voltraRiseFromBehind 3.0s cubic-bezier(0.10, 1, 0.20, 1) 0.1s both;
+}
+
+/* ── Subtitle text ── */
+.voltra-subtitle-text {
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  transition: fill 0.8s ease, opacity 0.8s ease;
+}
+
+.voltra-theme-light .voltra-subtitle-text {
+  fill: #1a2533;
+  opacity: 0.70;
+}
+
+.voltra-theme-dark .voltra-subtitle-text {
+  fill: #c8d9f0;
+  opacity: 0.78;
+}
+
+@keyframes voltraSubtitlesFade {
+  0%   { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.voltra-subtitles {
+  transform-box: view-box;
+  animation: voltraSubtitlesFade 1.8s cubic-bezier(0.16, 1, 0.3, 1) 1.8s both;
+  will-change: opacity, transform;
+}
+
+/* Minimal Glassmorphic Floating Controls */
+.theme-controls {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.theme-controls-slice-open,
+.cinematic-landing-root.slice-is-active .theme-controls {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateY(-8px);
+}
+
+@media (max-width: 768px) {
+  .theme-controls {
+    top: 16px;
+    right: 16px;
+  }
+}
+
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(15, 23, 42, 0.38);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  color: #f8fafc;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(15, 23, 42, 0.62);
+  border-color: rgba(255, 255, 255, 0.45);
+  transform: scale(1.06);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.38), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+.theme-svg {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Light mode minimal glassmorphism */
+html:not(.dark) .theme-toggle-btn {
+  background: rgba(255, 255, 255, 0.68);
+  border-color: rgba(255, 255, 255, 0.85);
+  color: #0f172a;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), inset 0 1px 2px rgba(255, 255, 255, 0.95);
+}
+
+html:not(.dark) .theme-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12), inset 0 1px 2px rgba(255, 255, 255, 1);
+}
+
+/* ==========================================================================
+   MINIMAL KAVACH PRELOADER
+   Ultra-minimalist, pure aesthetic
+   ========================================================================== */
+
+.kavach-minimal-loader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #040608;
+  color: #ffffff;
+  overflow: hidden;
+  user-select: none;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+}
+
+.kavach-minimal-loader.loader-exiting {
+  opacity: 0;
+  transform: scale(1.02);
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+.kavach-brand-title {
+  font-family: "Space Grotesk", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 0.8em;
+  text-transform: uppercase;
+  color: #ffffff;
+  padding-left: 0.8em; /* perfectly centers tracked text */
+  margin-bottom: 2.25rem;
+  opacity: 0.92;
+}
+
+.kavach-loader-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 220px;
+  max-width: 75vw;
+}
+
+.kavach-loader-track {
+  position: relative;
+  width: 100%;
+  height: 1.5px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.kavach-loader-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: #a3e635;
+  box-shadow: 0 0 10px rgba(163, 230, 53, 0.8);
+  border-radius: 999px;
+  transition: width 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.kavach-loader-meta {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.6rem;
+  font-family: "IBM Plex Mono", monospace, ui-monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: lowercase;
+}
+
+.kavach-percent-label {
+  font-variant-numeric: tabular-nums;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.kavach-micro-status {
+  margin-top: 0.85rem;
+  font-family: "IBM Plex Mono", monospace, ui-monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.45);
+  text-align: center;
+  min-height: 1rem;
+  animation: microTaskFade 0.4s ease-in-out;
+}
+
+@keyframes microTaskFade {
+  from { opacity: 0; transform: translateY(2px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 640px) {
+  .kavach-brand-title {
+    font-size: 1.15rem;
+    letter-spacing: 0.65em;
+    padding-left: 0.65em;
+    margin-bottom: 2rem;
+  }
+  .kavach-loader-block {
+    width: 180px;
+  }
+}
+
+/* Landing state gating transitions */
+.cinematic-landing-root:not(.is-landing-ready) .theme-controls,
+.cinematic-landing-root:not(.is-landing-ready) .cinematic-mobile-swipe {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cinematic-landing-root:not(.is-landing-ready) .voltra-subtitles-svg {
+  opacity: 0;
+}
+
+.cinematic-landing-root.is-landing-ready .theme-controls {
+  transition: opacity 0.8s ease 0.25s;
+  opacity: 1;
+}
+
+.cinematic-landing-root.is-landing-ready .cinematic-mobile-swipe {
+  transition: opacity 0.8s ease 0.3s;
+  opacity: 1;
+}
+
+.cinematic-landing-root.is-landing-ready .voltra-subtitles-svg {
+  transition: opacity 1.2s ease 0.4s;
+  opacity: 1;
+}
+
+/* ==========================================================================
+   VOLTRA "SLICE & DICER" APPROACHING SYSTEM
+   ========================================================================== */
+
+.voltra-slice-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.voltra-slice-overlay.slice-approaching {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.voltra-slice-overlay.slice-leaving {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* 5 Vertical Slices */
+.voltra-slice-strips {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  perspective: 1400px;
+}
+
+.slice-strip {
+  flex: 1;
+  height: 100%;
+  transform: translate3d(0, 108%, 0);
+  transition: transform 0.52s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.slice-approaching .slice-strip               { transform: translate3d(0, 0%, 0); }
+.slice-approaching .slice-strip:nth-child(1)  { transition-delay: 0.01s; }
+.slice-approaching .slice-strip:nth-child(2)  { transition-delay: 0.04s; }
+.slice-approaching .slice-strip:nth-child(3)  { transition-delay: 0.07s; }
+.slice-approaching .slice-strip:nth-child(4)  { transition-delay: 0.10s; }
+.slice-approaching .slice-strip:nth-child(5)  { transition-delay: 0.13s; }
+
+.slice-leaving .slice-strip                   { transform: translate3d(0, 108%, 0); }
+.slice-leaving .slice-strip:nth-child(5)      { transition-delay: 0.01s; }
+.slice-leaving .slice-strip:nth-child(4)      { transition-delay: 0.04s; }
+.slice-leaving .slice-strip:nth-child(3)      { transition-delay: 0.07s; }
+.slice-leaving .slice-strip:nth-child(2)      { transition-delay: 0.10s; }
+.slice-leaving .slice-strip:nth-child(1)      { transition-delay: 0.13s; }
+
+/* Strip fills — Light */
+.slice-theme-light .slice-strip,
+html:not(.dark) #voltraSliceOverlay .slice-strip {
+  background: linear-gradient(160deg, #f8fafc 0%, #eef2f9 100%) !important;
+  border-right: 1px solid rgba(15, 23, 42, 0.06) !important;
+}
+.slice-theme-light .slice-strip:last-child,
+html:not(.dark) #voltraSliceOverlay .slice-strip:last-child { border-right: none !important; }
+
+/* Strip fills — Dark */
+.slice-theme-dark .slice-strip,
+html.dark #voltraSliceOverlay .slice-strip {
+  background: linear-gradient(160deg, #050c18 0%, #080f1f 100%) !important;
+  border-right: 1px solid rgba(0, 200, 255, 0.08) !important;
+}
+.slice-theme-dark .slice-strip:last-child,
+html.dark #voltraSliceOverlay .slice-strip:last-child { border-right: none !important; }
+
+/* Foreground Content Layer */
+.voltra-slice-content {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+  scrollbar-width: thin;
+}
+
+.slice-approaching .voltra-slice-content {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.36s;
+}
+
+.slice-leaving .voltra-slice-content {
+  opacity: 0;
+  transform: translateY(18px);
+  transition-duration: 0.28s;
+  transition-delay: 0s;
+}
+
+.slice-theme-light .voltra-slice-content { scrollbar-color: rgba(15,23,42,0.18) transparent; }
+.slice-theme-dark  .voltra-slice-content { scrollbar-color: rgba(0,200,255,0.25) transparent; }
+
+/* Navigation Bar inside Slice */
+.slice-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 5vw 0;
+  flex-shrink: 0;
+  max-width: 1340px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.slice-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.slice-nav-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  animation: pulseDot 2.2s ease-in-out infinite;
+}
+
+.slice-theme-light .slice-nav-pulse {
+  background: #0284c7;
+  box-shadow: 0 0 8px rgba(2, 132, 199, 0.6);
+}
+.slice-theme-dark .slice-nav-pulse {
+  background: #00c8ff;
+  box-shadow: 0 0 12px rgba(0, 200, 255, 0.7);
+}
+
+.slice-nav-wordmark {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+}
+
+.slice-theme-light .slice-nav-wordmark { color: #0f172a; }
+.slice-theme-dark  .slice-nav-wordmark { color: #f8fafc; }
+
+/* Close / Return Button */
+.slice-close-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slice-theme-light .slice-close-btn {
+  background: rgba(15, 23, 42, 0.07);
+  border-color: rgba(15, 23, 42, 0.12);
+  color: #1e293b;
+}
+.slice-theme-light .slice-close-btn:hover {
+  background: rgba(15, 23, 42, 0.13);
+  transform: translateY(-1px);
+}
+
+.slice-theme-dark .slice-close-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: #e2e8f0;
+}
+.slice-theme-dark .slice-close-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.32);
+  transform: translateY(-1px);
+}
+
+.slice-close-x svg { display: block; }
+
+
+/* Main Body: Editorial 2-column grid */
+.slice-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  flex-shrink: 0;
+  padding: 48px 5vw 40px;
+  min-height: 0;
+  align-items: start;
+  max-width: 1340px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.slice-editorial {
+  padding-right: 6vw;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.slice-kicker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.slice-kicker-line {
+  width: 28px;
+  height: 2px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.slice-theme-light .slice-kicker-line { background: #0284c7; }
+.slice-theme-dark  .slice-kicker-line { background: #00c8ff; }
+
+.slice-kicker-text {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+}
+.slice-theme-light .slice-kicker-text { color: #0284c7; }
+.slice-theme-dark  .slice-kicker-text { color: #38bdf8; }
+
+.slice-headline {
+  font-size: clamp(2.6rem, 4.8vw, 4.4rem);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -1.5px;
+  margin-bottom: 22px;
+}
+.slice-theme-light .slice-headline { color: #060e1a; }
+.slice-theme-dark  .slice-headline { color: #f8fafc; }
+
+.slice-headline-accent {
+  display: block;
+  background: linear-gradient(118deg, #0284c7 0%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.slice-theme-dark .slice-headline-accent {
+  background: linear-gradient(118deg, #00c8ff 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.slice-lead {
+  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  line-height: 1.72;
+  max-width: 520px;
+  margin-bottom: 36px;
+}
+.slice-theme-light .slice-lead { color: #334155; }
+.slice-theme-dark  .slice-lead { color: #94a3b8; }
+
+.slice-stats-bar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 36px;
+  border-radius: 16px;
+  overflow: hidden;
+  padding: 20px 0;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+}
+.slice-theme-light .slice-stats-bar {
+  border-color: rgba(15, 23, 42, 0.09);
+}
+.slice-theme-dark .slice-stats-bar {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.slice-stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 0 16px;
+}
+
+.slice-stat-sep {
+  width: 1px;
+  height: 36px;
+  flex-shrink: 0;
+}
+.slice-theme-light .slice-stat-sep { background: rgba(15, 23, 42, 0.1); }
+.slice-theme-dark  .slice-stat-sep { background: rgba(255, 255, 255, 0.1); }
+
+.slice-stat-value {
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+.slice-stat-value small {
+  font-size: 0.55em;
+  font-weight: 700;
+  letter-spacing: 0;
+  vertical-align: super;
+  margin-left: 1px;
+}
+.slice-theme-light .slice-stat-value { color: #0f172a; }
+.slice-theme-dark  .slice-stat-value { color: #f8fafc; }
+
+.slice-stat-name {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+.slice-theme-light .slice-stat-name { color: #64748b; }
+.slice-theme-dark  .slice-stat-name { color: #64748b; }
+
+.slice-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.slice-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  border: none;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.slice-theme-light .slice-cta-primary {
+  background: #0f172a;
+  color: #ffffff;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.22);
+}
+.slice-theme-light .slice-cta-primary:hover {
+  background: #1e293b;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 14px 36px rgba(15, 23, 42, 0.32);
+}
+.slice-theme-dark .slice-cta-primary {
+  background: linear-gradient(135deg, #00c8ff 0%, #0284c7 100%);
+  color: #020c14;
+  box-shadow: 0 10px 32px rgba(0, 200, 255, 0.3);
+}
+.slice-theme-dark .slice-cta-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 14px 42px rgba(0, 200, 255, 0.48);
+}
+.slice-cta-primary svg { flex-shrink: 0; transition: transform 0.3s ease; }
+.slice-cta-primary:hover svg { transform: translateX(4px); }
+
+.slice-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.slice-theme-light .slice-live-badge { color: #16a34a; }
+.slice-theme-dark  .slice-live-badge { color: #4ade80; }
+
+.slice-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 8px currentColor;
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+/* Capability Cards */
+.slice-cards-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.slice-capability-card {
+  padding: 24px 26px;
+  border-radius: 18px;
+  transition: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+.slice-capability-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px;
+  height: 100%;
+  border-radius: 3px 0 0 3px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.slice-capability-card:hover::before { opacity: 1; }
+
+.slice-theme-light .slice-capability-card {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(15, 23, 42, 0.07);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.04);
+}
+.slice-theme-light .slice-capability-card::before { background: #0284c7; }
+.slice-theme-light .slice-capability-card:hover {
+  transform: translateX(6px);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.07);
+  border-color: rgba(2, 132, 199, 0.2);
+}
+
+.slice-theme-dark .slice-capability-card {
+  background: rgba(8, 16, 32, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+}
+.slice-theme-dark .slice-capability-card::before { background: #00c8ff; }
+.slice-theme-dark .slice-capability-card:hover {
+  transform: translateX(6px);
+  border-color: rgba(0, 200, 255, 0.28);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 24px rgba(0, 200, 255, 0.1);
+}
+
+.slice-cap-num {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.slice-theme-light .slice-cap-num { color: #0284c7; }
+.slice-theme-dark  .slice-cap-num { color: #00c8ff; }
+
+.slice-cap-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.slice-theme-light .slice-cap-title { color: #0f172a; }
+.slice-theme-dark  .slice-cap-title { color: #f1f5f9; }
+
+.slice-cap-body {
+  font-size: 13px;
+  line-height: 1.6;
+}
+.slice-theme-light .slice-cap-body { color: #475569; }
+.slice-theme-dark  .slice-cap-body { color: #94a3b8; }
+
+/* Direct Embedded React Frontend Boundary */
+.voltra-frontend-content-boundary {
+  width: 100%;
+  flex: 1;
+  position: relative;
+  z-index: 10;
+  scroll-margin-top: 1rem;
+}
+
+/* Responsive Overrides */
+@media (max-width: 1100px) {
+  .slice-body {
+    grid-template-columns: 1fr;
+    padding: 36px 5vw 28px;
+    gap: 32px;
+  }
+  .slice-editorial {
+    padding-right: 0;
+  }
+  .slice-cards-col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .slice-nav {
+    padding: 16px 5vw 0;
+  }
+  .slice-close-label {
+    display: none;
+  }
+  .slice-body {
+    padding: 28px 5vw 24px;
+    gap: 28px;
+  }
+  .slice-headline {
+    font-size: clamp(2rem, 8vw, 2.8rem);
+  }
+  .slice-stats-bar {
+    overflow-x: auto;
+    padding: 16px 0;
+  }
+  .slice-cards-col {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   macOS Pro Design System Utilities
+   ========================================================================== */
+
+.macos-window {
+  border-radius: 1.25rem;
+  border: 1px solid var(--border);
+  background: var(--card);
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.02);
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.dark .macos-window {
+  box-shadow: 0 20px 44px -10px rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+}
+
+.macos-traffic-dots {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.macos-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.macos-dot-red {
+  background-color: #ff5f57;
+  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.12);
+}
+
+.macos-dot-yellow {
+  background-color: #febc2e;
+  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.12);
+}
+
+.macos-dot-green {
+  background-color: #28c840;
+  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.12);
+}
+
+.macos-traffic-dots:hover .macos-dot {
+  transform: scale(1.08);
+}
+
+/* Apple macOS Segmented Capsule Control */
+.macos-segmented {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px;
+  border-radius: 9999px;
+  background: color-mix(in oklab, var(--muted) 85%, transparent);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+}
+
+.macos-segmented-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted-foreground);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
+
+.macos-segmented-btn:hover {
+  color: var(--foreground);
+}
+
+.macos-segmented-btn.active {
+  background: var(--card);
+  color: var(--foreground);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.dark .macos-segmented-btn.active {
+  background: var(--surface);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+
+/* ==========================================================================
+   VOLTRA — GLOBAL MOBILE RESPONSIVENESS LAYER
+   Targets xs (<480px), sm (<640px), md (<768px)
+   ========================================================================== */
+
+/* ── Prevent horizontal overflow on all pages ── */
+html, body { overflow-x: hidden; }
+* { min-width: 0; }
+
+/* ── macos-segmented: wrap + shrink on mobile ── */
+@media (max-width: 768px) {
+  .macos-segmented {
+    flex-wrap: wrap;
+    border-radius: 1rem;
+    gap: 2px;
+    padding: 4px;
+  }
+  .macos-segmented-btn {
+    padding: 5px 10px;
+    font-size: 11px;
+    border-radius: 0.75rem;
+  }
+}
+
+/* ── Dashboard route: make KPI grid 2-col on xs ── */
+@media (max-width: 480px) {
+  /* RUL distribution histogram: 2 columns on tiny screens */
+  .rul-histogram-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* ── power-line animation — hide on mobile (layout risk) ── */
+@media (max-width: 640px) {
+  .power-line { display: none; }
+}
+
+/* ── Grid page: asset cards always 1-col on xs ── */
+@media (max-width: 480px) {
+  /* asset card grid → single column */
+  .asset-card-grid { grid-template-columns: 1fr !important; }
+
+  /* Maintenance plan table — enable horizontal scroll */
+  .plan-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* Inspector modal: full width */
+  .inspector-modal-inner { width: 100% !important; max-width: 100% !important; border-radius: 1rem !important; }
+}
+
+/* ── Predict page: studio workspace → stack on mobile ── */
+@media (max-width: 1024px) {
+  .predict-workspace { display: flex !important; flex-direction: column !important; }
+}
+
+/* ── Login page: panel stacks on mobile ── */
+@media (max-width: 1024px) {
+  .login-left-panel { display: none !important; }
+}
+
+/* ── Ticker feed: hide on xs, show short version ── */
+@media (max-width: 480px) {
+  .ticker-full-message { display: none !important; }
+  .ticker-short-message { display: inline !important; }
+}
+
+/* ── Home hero: reduce min-height ── */
+@media (max-width: 480px) {
+  .hero-min-height { min-height: 480px !important; }
+}
+
+/* ── SiteNav: reduce horizontal padding on xs ── */
+@media (max-width: 480px) {
+  .site-nav-inner { padding-left: 12px !important; padding-right: 12px !important; }
+}
+
+/* ── Table cells: truncate long text on small viewports ── */
+@media (max-width: 640px) {
+  td { max-width: 120px; }
+  th { white-space: nowrap; }
+}
+
+/* ── AuthModal: full-screen on xs ── */
+@media (max-width: 480px) {
+  .auth-modal-card {
+    width: calc(100vw - 16px) !important;
+    max-width: calc(100vw - 16px) !important;
+    margin: 8px !important;
+    padding: 20px !important;
+    border-radius: 1.25rem !important;
+  }
+}
+
+/* ── Hazard search inputs: stack on xs ── */
+@media (max-width: 480px) {
+  .hazard-input-row { flex-direction: column !important; }
+  .hazard-zone-input { width: 100% !important; }
+}
+
+/* ── Dashboard chart: reduce height on mobile ── */
+@media (max-width: 640px) {
+  .dashboard-bar-chart { height: 160px !important; }
+}
+
+/* ── Scrollbar-none utility ── */
+.scrollbar-none { scrollbar-width: none; -ms-overflow-style: none; }
+.scrollbar-none::-webkit-scrollbar { display: none; }
+
+/* ── Shadow-card utility (used in grid.tsx plan/hazard panels) ── */
+@utility shadow-card {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 4px 16px -4px rgba(0,0,0,0.08);
+}
+
+/* ── Touch-friendly tap targets on mobile ── */
+@media (max-width: 768px) {
+  button, a, [role="button"] {
+    min-height: 36px;
+  }
+  /* Remove tap highlight on mobile */
+  * { -webkit-tap-highlight-color: transparent; }
+}
+
+/* ── Prevent font size inflation on iOS ── */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+/* ==========================================================================
+   VOLTRA MOBILE APP SHELL
+   A dedicated phone interface shared by the PWA and Capacitor application.
+   ========================================================================== */
+
+.voltra-mobile-header,
+.voltra-bottom-nav {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --voltra-mobile-gutter: 14px;
+    --voltra-mobile-nav-height: 70px;
+  }
+
+  html,
+  body {
+    overflow-x: clip;
+    overscroll-behavior-y: none;
+    background: var(--background);
+  }
+
+  body {
+    min-width: 320px;
+  }
+
+  .voltra-mobile-header {
+    position: sticky;
+    z-index: 48;
+    top: 0;
+    display: flex;
+    min-height: calc(62px + env(safe-area-inset-top));
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    padding: calc(10px + env(safe-area-inset-top)) var(--voltra-mobile-gutter) 10px;
+    border-bottom: 1px solid color-mix(in oklab, var(--border) 78%, transparent);
+    background: color-mix(in oklab, var(--background) 88%, transparent);
+    box-shadow: 0 12px 35px -28px rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(22px) saturate(1.25);
+  }
+
+  .voltra-mobile-brand {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 10px;
+    color: var(--foreground);
+    text-decoration: none;
+  }
+
+  .voltra-mobile-mark {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    place-items: center;
+    border-radius: 13px;
+    color: #10130c;
+    background: #d2f831;
+    box-shadow: 0 9px 24px -12px rgba(149, 190, 20, 0.85);
+  }
+
+  .voltra-mobile-mark svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+
+  .voltra-mobile-brand > span:last-child {
+    display: grid;
+    min-width: 0;
+    gap: 2px;
+  }
+
+  .voltra-mobile-brand b {
+    overflow: hidden;
+    font: 700 15px/1.1 var(--font-display);
+    letter-spacing: -0.02em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .voltra-mobile-brand small {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted-foreground);
+    font: 600 9px/1.2 var(--font-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .voltra-mobile-brand small i {
+    width: 6px;
+    height: 6px;
+    border-radius: 99px;
+    background: #9ca3af;
+  }
+
+  .voltra-mobile-brand small i.is-connected {
+    background: #20c875;
+    box-shadow: 0 0 0 3px rgba(32, 200, 117, 0.12);
+  }
+
+  .voltra-mobile-brand small i.is-offline {
+    background: #f3a82f;
+  }
+
+  .voltra-mobile-menu-trigger {
+    display: grid;
+    width: 40px;
+    height: 40px;
+    min-height: 40px;
+    flex: 0 0 40px;
+    place-items: center;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    color: var(--foreground);
+    background: var(--card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .voltra-mobile-menu-trigger svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .voltra-app-content {
+    min-width: 0;
+    padding-bottom: calc(var(--voltra-mobile-nav-height) + 28px + env(safe-area-inset-bottom));
+  }
+
+  .voltra-site-footer {
+    display: none;
+  }
+
+  body:has(.bill-modal-backdrop) .voltra-bottom-nav,
+  body:has(.bill-modal-backdrop) .voltra-assistant-launcher {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(18px);
+  }
+
+  .voltra-bottom-nav {
+    position: fixed;
+    z-index: 47;
+    right: 10px;
+    bottom: calc(8px + env(safe-area-inset-bottom));
+    left: 10px;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    min-height: var(--voltra-mobile-nav-height);
+    padding: 7px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 23px;
+    background: rgba(12, 14, 13, 0.94);
+    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.34), inset 0 1px rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px) saturate(1.35);
+  }
+
+  .voltra-bottom-item {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    min-height: 54px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 3px;
+    border: 0;
+    border-radius: 17px;
+    color: #90948e;
+    background: transparent;
+    text-decoration: none;
+    transition: color 180ms ease, background 180ms ease, transform 180ms ease;
+  }
+
+  .voltra-bottom-item:active {
+    transform: scale(0.94);
+  }
+
+  .voltra-bottom-item span {
+    display: grid;
+    width: 27px;
+    height: 25px;
+    place-items: center;
+    border-radius: 10px;
+  }
+
+  .voltra-bottom-item svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2;
+  }
+
+  .voltra-bottom-item b {
+    overflow: hidden;
+    width: 100%;
+    font: 650 9px/1 var(--font-sans);
+    letter-spacing: 0.01em;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .voltra-bottom-item.is-active {
+    color: #eaff9c;
+    background: rgba(210, 248, 49, 0.08);
+  }
+
+  .voltra-bottom-item.is-active span {
+    color: #d2f831;
+    background: rgba(210, 248, 49, 0.11);
+  }
+
+  .voltra-mobile-menu-backdrop {
+    padding-bottom: calc(var(--voltra-mobile-nav-height) + env(safe-area-inset-bottom));
+  }
+
+  .voltra-mobile-menu {
+    top: auto !important;
+    right: 10px !important;
+    bottom: calc(var(--voltra-mobile-nav-height) + 18px + env(safe-area-inset-bottom));
+    left: 10px !important;
+    width: auto;
+    max-width: none;
+    margin: 0;
+  }
+
+  .voltra-mobile-menu > div {
+    max-height: min(72dvh, 650px);
+    overflow-y: auto;
+    border-radius: 26px;
+    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.5);
+  }
+
+  .voltra-mobile-menu nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px;
+    padding: 12px;
+  }
+
+  .voltra-mobile-menu nav a {
+    min-height: 52px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.025);
+  }
+
+  .voltra-assistant-launcher {
+    right: 15px !important;
+    bottom: calc(var(--voltra-mobile-nav-height) + 24px + env(safe-area-inset-bottom)) !important;
+  }
+
+  [data-slot="sheet-content"] {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: calc(8px + env(safe-area-inset-bottom));
+  }
+
+  .voltra-app-content > *:not(.cinematic-landing-root) {
+    min-width: 0;
+  }
+
+  .voltra-app-content h1 {
+    max-width: 18ch;
+    font-size: clamp(1.65rem, 7.2vw, 2.15rem);
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+  }
+
+  .voltra-app-content h2 {
+    letter-spacing: -0.025em;
+  }
+
+  .voltra-app-content main,
+  .voltra-app-content .patterns-page,
+  .voltra-app-content .workspace-page,
+  .voltra-app-content .bill-page {
+    max-width: 100vw;
+  }
+
+  .voltra-app-content table {
+    font-size: 11px;
+  }
+
+  .voltra-app-content input,
+  .voltra-app-content textarea,
+  .voltra-app-content select {
+    font-size: 16px;
+  }
+}
+
+/* ── Fix recharts ResponsiveContainer on narrow screens ── */
+@media (max-width: 480px) {
+  .recharts-wrapper { font-size: 9px !important; }
+  .recharts-cartesian-axis-tick-value { font-size: 8px !important; }
+}
+
+/* ==========================================================================
+   VOLTRA CINEMATIC LANDING — MOBILE PHONE LAYOUT
+   On screens ≤ 640 px the cinematic hero is presented as a framed 16:9 card
+   centred vertically, with branded space above and below (like the reference).
+   ========================================================================== */
+
+@media (max-width: 640px) {
+
+  /* Root becomes a tall scrollable column instead of a fixed fullscreen layer */
+  .cinematic-landing-root {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background: #0a0f1a;          /* deep navy — premium background */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── ABOVE-CARD BRANDING BAND ── */
+  .cinematic-mobile-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 20px;
+    flex-shrink: 0;
+  }
+
+  .cinematic-mobile-wordmark {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .cinematic-mobile-bolt-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .cinematic-mobile-bolt-line span.line-seg {
+    width: 1px;
+    height: 18px;
+    background: rgba(255, 255, 255, 0.18);
+    display: block;
+  }
+
+  .cinematic-mobile-bolt {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  .cinematic-mobile-tagline {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.38);
+    text-align: center;
+    margin-top: 4px;
+  }
+
+  /* ── 16:9 FRAMED CINEMATIC CARD ── */
+  .cinematic-mobile-frame {
+    width: calc(100vw - 32px);            /* full-width minus side margins */
+    aspect-ratio: 16 / 9;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.10),
+      0 24px 60px rgba(0, 0, 0, 0.65),
+      0 4px 16px rgba(0, 0, 0, 0.5);
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  /* All layers inside the card are already absolute/inset-0 — no overrides needed */
+  /* The house-layer clip-path still works because .fullscreen-cinematic is relative */
+
+  /* ── BELOW-CARD BRANDING BAND ── */
+  .cinematic-mobile-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding-top: 20px;
+    flex-shrink: 0;
+  }
+
+  .cinematic-mobile-bottom-copy {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.38);
+    text-align: center;
+    line-height: 1.8;
+  }
+
+  .cinematic-mobile-bottom-wordmark {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.42);
+    margin-top: 2px;
+  }
+
+  /* ── Theme controls: hidden from the fixed layer on mobile ── */
+  /* The theme button is rendered inside the card via inline absolute positioning */
+  .theme-controls {
+    display: none;
+  }
+
+  /* Scroll hint arrow — swipe up indicator */
+  .cinematic-mobile-swipe {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    opacity: 0.55;
+    animation: swipeHintBounce 2.4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .cinematic-mobile-swipe span {
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  .cinematic-mobile-swipe svg {
+    color: #fff;
+  }
+
+  @keyframes swipeHintBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.55; }
+    50%       { transform: translateX(-50%) translateY(5px); opacity: 0.85; }
+  }
+
+  /* The slice overlay stays fixed/fullscreen even on mobile */
+  .voltra-slice-overlay {
+    position: fixed;
+    inset: 0;
+  }
+}
+
+/* ── Seamless Endless Flowing Marquee Carousel ── */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-flow {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 45s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-flow:hover {
+  animation-play-state: paused;
+}
+
+@media (max-width: 640px) {
+  .animate-marquee-flow {
+    animation-duration: 32s;
+  }
+}
+
+/* ── MapLibre Controls & Popups Dark Mode Theme ── */
+.dark .maplibregl-popup-content {
+  background: #18181b !important;
+  color: #f4f4f5 !important;
+  border: 1px solid #27272a !important;
+  border-radius: 10px !important;
+  box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.7) !important;
+  padding: 12px 14px !important;
+}
+.dark .maplibregl-popup-close-button {
+  color: #a1a1aa !important;
+  font-size: 16px !important;
+  padding: 4px 8px !important;
+}
+.dark .maplibregl-popup-close-button:hover {
+  color: #ffffff !important;
+  background: transparent !important;
+}
+.dark .maplibregl-popup-anchor-top .maplibregl-popup-tip {
+  border-bottom-color: #27272a !important;
+}
+.dark .maplibregl-popup-anchor-bottom .maplibregl-popup-tip {
+  border-top-color: #27272a !important;
+}
+.dark .maplibregl-popup-anchor-left .maplibregl-popup-tip {
+  border-right-color: #27272a !important;
+}
+.dark .maplibregl-popup-anchor-right .maplibregl-popup-tip {
+  border-left-color: #27272a !important;
+}
+.dark .maplibregl-ctrl-group {
+  background-color: #18181b !important;
+  border: 1px solid #27272a !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+  overflow: hidden;
+}
+.dark .maplibregl-ctrl-group button {
+  border-bottom: 1px solid #27272a !important;
+}
+.dark .maplibregl-ctrl-group button:last-child {
+  border-bottom: none !important;
+}
+.dark .maplibregl-ctrl-group button span {
+  filter: invert(1) brightness(0.9);
+}
+.dark .maplibregl-ctrl-scale {
+  background-color: rgba(24, 24, 27, 0.85) !important;
+  color: #a1a1aa !important;
+  border-color: #3f3f46 !important;
+  font-family: var(--font-mono, monospace) !important;
+  font-size: 10px !important;
+}
+
+
+/* ── Infinite Guide Carousel Keyframes ── */
+@keyframes voltraInfiniteGuide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
