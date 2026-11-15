@@ -9,5 +9,8 @@
     "preview": "npm --prefix src/frontend run preview",
     "lint": "npm --prefix src/frontend run lint"
   },
-  "description": "VOLTRA MSME ESP32 smart home energy monitoring system."
+  "description": "VOLTRA MSME ESP32 smart home energy monitoring system.",
+  "dependencies": {
+    "vercel": "^65.16.0"
+  }
 }
