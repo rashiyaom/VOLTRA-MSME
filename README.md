@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/voltra-logo.png" alt="VOLTRA Logo" width="140" />
+<img src="assets/voltra-logo.png" alt="VOLTRA Logo" width="160" />
 
 # VOLTRA MSME
 ### Next-Gen IoT Smart Home Energy Telemetry, Sub-Panel Circuit Control & Autonomous Overload Protection
@@ -26,8 +26,72 @@
 
 <br />
 
-[🌐 Live Deployment](https://voltra-msme.vercel.app) • [🚀 Quick Start](#-quick-start) • [⚡ Hardware Architecture](#-hardware-architecture--pinout) • [🧠 AI & Adaptive ML](#-multi-layer-intelligence--ai-architecture) • [📊 Live Animations](#-live-animated-demonstrations) • [📄 Full PDF Showcase](VOLTRA_Live_Platform_Showcase.pdf)
+[🌐 Live Deployment](https://voltra-msme.vercel.app) • [🎬 Live Animations](#-live-animated-demonstrations) • [📸 Hardware Prototype](#-physical-hardware-prototype--patent-notice) • [⚡ Hardware Pinout](#-hardware-architecture--pinout) • [🧠 AI & ML](#-multi-layer-intelligence--ai-architecture) • [🚀 Quick Start](#-quick-start) • [📄 Master PDF Showcase](VOLTRA_Live_Platform_Showcase.pdf)
 
+</div>
+
+---
+
+## 🎬 Live Animated Demonstrations
+
+Witness VOLTRA's real-time telemetry pipeline, instantaneous AC sinusoidal wave tracking, breaker tripping, tariff modeling, and online adaptive learning running on live simulated dummy telemetry:
+
+### 1. High-Speed Multi-Channel Oscilloscope Stream
+Real-time 50 Hz AC waveform tracking with dynamic voltage and branch current harmonics, live formula calculations ($P = V \times (I_1 + I_2)$), and instant Rupee burn-rate tracking (₹/hr):
+
+<div align="center">
+  <img src="assets/live_waveform_stream.gif" alt="VOLTRA Live Oscilloscope Waveform Stream" width="95%" style="border-radius: 12px; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" />
+  <p><em>Figure 1: Live Oscilloscope — Real-time AC waveform rendering, instantaneous power factor calculation, and dynamic ₹/hr cost tracking.</em></p>
+</div>
+
+<br />
+
+### 2. Energy Command Center & Load Trajectory
+The primary homeowner cockpit displaying live line voltage, aggregate amperage, active power in kW, power factor, Breaker Guardian ARMED status, and live 24-hour power trajectory curve:
+
+<div align="center">
+  <img src="assets/live_dashboard_telemetry.gif" alt="VOLTRA Live Dashboard Telemetry" width="95%" style="border-radius: 12px; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" />
+  <p><em>Figure 2: Energy Command Center — Live AC voltage RMS, power factor, sub-8ms Guardian state, and real-time load trajectory.</em></p>
+</div>
+
+<br />
+
+### 3. Smart Breakers & Relay Matrix Actuation
+Dedicated sub-panel controls for Living Room HVAC, Kitchen Refrigeration, Master Lighting, EV Charger, and Utility with instantaneous breaker open/close switching and overload cut-offs:
+
+<div align="center">
+  <img src="assets/smart_breakers_live.gif" alt="VOLTRA Smart Breakers Matrix" width="95%" style="border-radius: 12px; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" />
+  <p><em>Figure 3: Smart Breaker Matrix — 5 physical branch relays with real-time amperage gauges, rated capacity bars, and master emergency cut-off.</em></p>
+</div>
+
+<br />
+
+### 4. Indian Rupee Tariff & Diurnal Load Analytics
+24-hour diurnal profile modeling, Time-of-Use (ToU) GERC tariff slab comparisons (Peak, Normal, Off-Peak), solar generation offset scenarios, and dynamic load-shifting cost projections:
+
+<div align="center">
+  <img src="assets/analytics_tariff_simulator.gif" alt="VOLTRA Tariff Simulator & Diurnal Analytics" width="95%" style="border-radius: 12px; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" />
+  <p><em>Figure 4: Tariff & Energy Simulator — Interactive diurnal load curve, dynamic ₹/kWh utility rate slider, and cost optimization scenarios.</em></p>
+</div>
+
+<br />
+
+### 5. Monthly Bill Planning Engine & Quota Allocation
+Converts a target Rupee budget (e.g. ₹4,000/month) into maximum daily kilowatt-hour allowances, balances monitored CT circuits with manual appliances, and preserves essential loads:
+
+<div align="center">
+  <img src="assets/monthly_bill_planner_live.gif" alt="VOLTRA Monthly Bill Planner" width="95%" style="border-radius: 12px; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" />
+  <p><em>Figure 5: Monthly Bill Planner — Target rupee budget allocator, essential load preservation quotas, and operational daily appliance schedules.</em></p>
+</div>
+
+<br />
+
+### 6. Usage Patterns & Online Adaptive Anomaly Detection
+5-minute IndexedDB bucket history, recurring habit windows, and online unsupervised adaptive anomaly detection with separate active vs. standby distributions:
+
+<div align="center">
+  <img src="assets/usage_patterns_adaptive.gif" alt="VOLTRA Usage Patterns & Adaptive ML" width="95%" style="border-radius: 12px; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" />
+  <p><em>Figure 6: Usage Patterns — 7-day circuit activity habits, out-of-schedule alerts, and online adaptive statistical anomaly tracking.</em></p>
 </div>
 
 ---
@@ -39,7 +103,7 @@
 
 <div align="center">
   <img src="assets/00_hardware_prototype_patent_disclaimer.png" alt="VOLTRA Physical Hardware Prototype" width="85%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.4);" />
-  <p><em>Figure 1: VOLTRA physical sub-panel prototype bench featuring branch load sockets, manual bypass switches, optical indicators, and internal sensor integration.</em></p>
+  <p><em>Figure 7: VOLTRA physical sub-panel prototype bench featuring branch load sockets, manual bypass switches, optical indicators, and internal sensor integration.</em></p>
 </div>
 
 ### Why VOLTRA is Unprecedented in the Global Market
@@ -49,29 +113,7 @@
 
 ---
 
-## 🎬 Live Animated Demonstrations
-
-Witness VOLTRA's real-time telemetry pipeline, instantaneous AC sinusoidal wave tracking, and sub-cycle responsiveness running on live simulated dummy telemetry:
-
-### 1. Real-Time Multi-Channel Oscilloscope Stream
-Real-time 50 Hz AC waveform tracking with dynamic voltage and branch current harmonics, live formula calculations ($P = V \times (I_1 + I_2)$), and instant Rupee burn-rate tracking (₹/hr):
-
-<div align="center">
-  <img src="assets/live_waveform_stream.gif" alt="VOLTRA Live Oscilloscope Waveform Stream" width="95%" style="border-radius: 10px; border: 1px solid #222;" />
-  <p><em>Live Oscilloscope: Multi-channel AC waveform rendering, instantaneous power calculations, and ₹/hr burn rate.</em></p>
-</div>
-
-### 2. Live Energy Command Center & Power Draw Trajectory
-Homeowner console updating live line voltage, aggregate amperage, active power in kW, power factor, and breaker statuses:
-
-<div align="center">
-  <img src="assets/live_dashboard_telemetry.gif" alt="VOLTRA Live Dashboard Telemetry" width="95%" style="border-radius: 10px; border: 1px solid #222;" />
-  <p><em>Energy Command Center: Real-time telemetry cards, Breaker Guardian ARMED state (<8.0 ms trip latency), and dynamic load trajectory.</em></p>
-</div>
-
----
-
-## 🖼️ Complete Platform Visual Walkthrough
+## 🖼️ High-Resolution Screen Gallery
 
 Download the complete high-resolution document: 📄 **[VOLTRA_Live_Platform_Showcase.pdf](VOLTRA_Live_Platform_Showcase.pdf)**
 
@@ -110,6 +152,32 @@ Download the complete high-resolution document: 📄 **[VOLTRA_Live_Platform_Sho
   <h4>6. Monthly Bill Planner & AI Schedule</h4>
   <img src="assets/08_monthly_bill_plan.png" alt="Monthly Bill Plan" width="100%" />
   <p><em>Rupee target budget converter, essential load retention rules, and Groq-powered daily operational appliance schedule.</em></p>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+  <h4>7. Power Draw Trajectory & Safety Suite</h4>
+  <img src="assets/03_dashboard_charts.png" alt="Power Draw Trajectory" width="100%" />
+  <p><em>Live historical power trajectory graph with test spike injection and safety trip audit logging.</em></p>
+</td>
+<td width="50%" valign="top">
+  <h4>8. Hardware Calibration Field Guide</h4>
+  <img src="assets/09_field_guide.png" alt="Field Guide" width="100%" />
+  <p><em>Searchable walkthrough covering sensor noise calibration, mains safety boundaries, and AI setup.</em></p>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+  <h4>9. Device Connectivity & Groq AI Settings</h4>
+  <img src="assets/10_device_settings.png" alt="Device Settings" width="100%" />
+  <p><em>Task-based settings for USB, Local Wi-Fi, Web Bluetooth, Blynk Cloud, and masked Groq key verification.</em></p>
+</td>
+<td width="50%" valign="top">
+  <h4>10. 11-Page Master Presentation PDF</h4>
+  <a href="VOLTRA_Live_Platform_Showcase.pdf">
+    <img src="assets/00_hardware_prototype_patent_disclaimer.png" alt="PDF Cover" width="100%" />
+  </a>
+  <p><em>Download the complete high-resolution 11-page exhibition document: <a href="VOLTRA_Live_Platform_Showcase.pdf">VOLTRA_Live_Platform_Showcase.pdf</a></em></p>
 </td>
 </tr>
 </table>
